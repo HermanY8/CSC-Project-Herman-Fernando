@@ -8,7 +8,7 @@ WIDTH, HEIGHT = 1000, 800
 WIN = pygame.display.set_mode((WIDTH, HEIGHT)) #Window Screen that we created
 pygame.display.set_caption("Clicks") # The main at the top of the window of our game
 
-BG = pygame.image.load("download (1).jpg")
+BG = pygame.transform.scale(pygame.image.load("download (1).jpg"), (WIDTH, HEIGHT))
 
 def draw():
     WIN.blit(BG, (0, 0))
