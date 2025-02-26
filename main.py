@@ -16,7 +16,7 @@ def main():
     while run:
         for event in pygame.event.get(): # Looking at when user presses x-button to close window
             if event.type == pygame.QUIT:
-                run = False # end for loop
+                run = False # end for loop.
                 break
 
 
