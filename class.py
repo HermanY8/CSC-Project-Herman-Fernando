@@ -12,5 +12,5 @@ class Position:
 
 class Car :
     def __init__(self, length:int, width:int):
-        self.legth = length
+        self.length = length
         self.width = width
