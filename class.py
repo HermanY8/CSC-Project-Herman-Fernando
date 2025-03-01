@@ -10,3 +10,7 @@ class Position:
         self.x = x_position
         self.y = y_position
 
+class Car :
+    def __init__(self, length:int, width:int):
+        self.legth = length
+        self.width = width
