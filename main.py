@@ -18,6 +18,7 @@ def draw(car):
     # add every draw() from each class in here
     car.draw(WIN)
 
+
     pygame.display.update()
 
 
