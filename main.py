@@ -6,6 +6,7 @@ WIDTH, HEIGHT = 1000, 800
 WIN = pygame.display.set_mode((WIDTH, HEIGHT)) #Window Screen that we created
 pygame.display.set_caption("Clicks") # The main at the top of the window of our game
 
+# Scaling background image to fit on the screen
 BG = pygame.transform.scale(pygame.image.load("download (1).jpg"), (WIDTH, HEIGHT))
 
 def draw():
