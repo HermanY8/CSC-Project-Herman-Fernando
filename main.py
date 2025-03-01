@@ -1,16 +1,32 @@
 import pygame
 import time
 import random
+from tkinter import *
+from threading import Timer
 
 WIDTH, HEIGHT = 1000, 800
 WIN = pygame.display.set_mode((WIDTH, HEIGHT)) #Window Screen that we created
 pygame.display.set_caption("Clicks") # The main at the top of the window of our game
 
-BG = pygame.transform.scale(pygame.image.load("download (1).jpg"), (WIDTH, HEIGHT))
+BG = pygame.transform.scale(pygame.image.load("Race_Track.jpg"), (WIDTH, HEIGHT))
+
+
+
+
+
+WIN.geometry("800x600")
+
+ClickerStart = Button(WIN, text="Click To start", padx=200, pady=100)
+ClickerStart.pack()
+window.mainloop()
+
+
 
 def draw():
     WIN.blit(BG, (0, 0))
     pygame.display.update()
+
+
 
 # making a while loop to make sure that our window stays open
 def main():
