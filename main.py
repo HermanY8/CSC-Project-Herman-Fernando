@@ -1,6 +1,7 @@
 import pygame
 import time
 import random
+import class_file
 
 WIDTH, HEIGHT = 1000, 800
 WIN = pygame.display.set_mode((WIDTH, HEIGHT)) #Window Screen that we created
@@ -11,6 +12,10 @@ BG = pygame.transform.scale(pygame.image.load("download (1).jpg"), (WIDTH, HEIGH
 
 def draw():
     WIN.blit(BG, (0, 0))
+
+    # add every draw() from each class in here
+    class_file.Car.draw(WIN)
+
     pygame.display.update()
 
 # making a while loop to make sure that our window stays open
