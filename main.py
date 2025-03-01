@@ -3,27 +3,21 @@ import time
 import random
 from tkinter import *
 from threading import Timer
+import class_file
 
 WIDTH, HEIGHT = 1000, 800
 WIN = pygame.display.set_mode((WIDTH, HEIGHT)) #Window Screen that we created
 pygame.display.set_caption("Clicks") # The main at the top of the window of our game
 
-BG = pygame.transform.scale(pygame.image.load("Race_Track.jpg"), (WIDTH, HEIGHT))
-
-
-
-
-
-WIN.geometry("800x600")
-
-ClickerStart = Button(WIN, text="Click To start", padx=200, pady=100)
-ClickerStart.pack()
-window.mainloop()
-
-
+# Scaling background image to fit on the screen
+BG = pygame.transform.scale(pygame.image.load("download (1).jpg"), (WIDTH, HEIGHT))
 
 def draw():
     WIN.blit(BG, (0, 0))
+
+    # add every draw() from each class in here
+    class_file.Car.draw(WIN)
+
     pygame.display.update()
 
 
