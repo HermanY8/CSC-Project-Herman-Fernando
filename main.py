@@ -1,6 +1,8 @@
 import pygame
 import time
 import random
+from tkinter import *
+from threading import Timer
 import class_file
 
 WIDTH, HEIGHT = 1000, 800
@@ -17,6 +19,8 @@ def draw():
     class_file.Car.draw(WIN)
 
     pygame.display.update()
+
+
 
 # making a while loop to make sure that our window stays open
 def main():
