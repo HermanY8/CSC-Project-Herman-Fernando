@@ -10,13 +10,13 @@ WIN = pygame.display.set_mode((WIDTH, HEIGHT)) # Window Screen that we created
 pygame.display.set_caption("Clicks") # The main at the top of the window of our game
 
 # Scaling background image to fit on the screen
-BG = pygame.transform.scale(pygame.image.load("download (1).jpg"), (WIDTH, HEIGHT))
+BG = pygame.transform.scale(pygame.image.load("Race_track.jpg"), (WIDTH, HEIGHT))
 
-def draw():
+def draw(car):
     WIN.blit(BG, (0, 0))
 
     # add every draw() from each class in here
-    class_file.Car.draw(WIN)
+    car.draw(WIN)
 
     pygame.display.update()
 
@@ -24,6 +24,9 @@ def draw():
 
 # making a while loop to make sure that our window stays open
 def main():
+
+    car = class_file.Car(class_file.Position(0, 605))
+
     run = True
 
     while run:
@@ -31,7 +34,7 @@ def main():
             if event.type == pygame.QUIT:
                 run = False # end for loop.
                 break
-        draw()
+        draw(car)
 
 
 
