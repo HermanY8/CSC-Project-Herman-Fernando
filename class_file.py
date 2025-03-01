@@ -1,11 +1,13 @@
 import pygame
+from pygame.examples.scrap_clipboard import screen
+
 import main
 
 
 class Score:
-    def __int__(self, high_score:int , current_score:int, scores:int):
-        self.HighScore = high_score
-        self.Current_Score = current_score
+    def __int__(self, high_score:list[dict] , current_score:int, scores:int):
+        self.highscores = high_score
+        self.current_score = 0
         self.Scores = scores
 
 class Position:
@@ -37,3 +39,13 @@ class Car :
 
     def draw(self, surface):
         pygame.draw.rect(surface, RED, (self.position.x, self.position.y, self.width, self.height))
+
+class Button():
+    def __init__(self, x,y,image):
+        self.image = image
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (x,y)
+
+    def draw(self):
+        screen.blit(self.image, (self.rect.x ,self.rect.y))
+
