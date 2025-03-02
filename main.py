@@ -23,8 +23,6 @@ def draw(car, score):
 
     pygame.display.update()
 
-
-
 # making a while loop to make sure that our window stays open
 def main():
 

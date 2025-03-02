@@ -19,7 +19,7 @@ class Score:
     # Need to add def update_current_score() to update the current score based on the clicker.
 
     def draw(self, surface):
-        font = pygame.font.SysFont("Comic Sans MS", 35)
+        font = pygame.font.SysFont("Comic Sans MS", 30)
         text_one = font.render("High Score: {}".format(self.high_score), True, BLACK)
         text_two = font.render("Current Score: {}".format(self.current_score), True, BLACK)
         surface.blit(text_one, (10, 10))
