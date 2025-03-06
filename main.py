@@ -36,7 +36,6 @@ def main():
                 run = False
         draw(car, score)
 
-
     pygame.quit() # Shuts down all Pygame modules and closes window
 
 if __name__ == "__main__": # makes sure we are running file and not importing it from a different file
