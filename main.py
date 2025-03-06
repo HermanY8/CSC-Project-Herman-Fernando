@@ -12,12 +12,16 @@ pygame.display.set_caption("Clicks") # The main at the top of the window of our 
 # Scaling background image to fit on the screen
 BG = pygame.transform.scale(pygame.image.load("Race_track.jpg"), (WIDTH, HEIGHT))
 
+start = pygame.image.load("Start Button.jpg").convert_alpha()
+
+start_button = class_file.Start(100, 200, start)
+
+
 def draw(car):
     WIN.blit(BG, (0, 0))
 
     # add every draw() from each class in here
     car.draw(WIN)
-
 
     pygame.display.update()
 
@@ -27,7 +31,7 @@ def draw(car):
 def main():
 
     car = class_file.Car(class_file.Position(0, 605))
-
+    start_button.draw()
     run = True
 
     while run:
