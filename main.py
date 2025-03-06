@@ -13,9 +13,9 @@ pygame.init() # Initializes Pygame modules which will be used in our program
 
 # Scaling background image to fit on the screen
 BG = pygame.transform.scale(pygame.image.load("Race_track.jpg"), (WIDTH, HEIGHT))
+start = pygame.image.load("Start Button.jpg").convert_alpha()
 
 def draw(car, score):
-start = pygame.image.load("Start Button.jpg").convert_alpha()
 
 start_button = class_file.Start(100, 200, start)
 
