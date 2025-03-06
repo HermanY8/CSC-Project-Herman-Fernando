@@ -16,7 +16,9 @@ class Score:
         if current_score > self.high_score:
             self.high_score = current_score
 
-    # Need to add def update_current_score() to update the current score based on the clicker.
+    # Need to work on this function
+    def update_current_score(self, current_score):
+        return self.current_score += 1
 
     def draw(self, surface):
         font = pygame.font.SysFont("Comic Sans MS", 30)
@@ -55,3 +57,6 @@ class Player:
     def __init__(self, name, score = 0):
         self.name = name
         self.score = score
+
+    def __repr__(self):
+        return "Player: {}, Score: {}".format(self.name, self.score)

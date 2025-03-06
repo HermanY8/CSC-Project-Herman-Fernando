@@ -12,7 +12,7 @@ pygame.display.set_caption("Clicks") # The main at the top of the window of our 
 pygame.init() # Initializes Pygame modules which will be used in our program
 
 # Scaling background image to fit on the screen
-BG = pygame.transform.scale(pygame.image.load("Race_track.jpg"), (WIDTH, HEIGHT))
+BG = pygame.transform.scale(pygame.image.load("Race_Track.jpg"), (WIDTH, HEIGHT))
 
 def draw(car, score):
     WIN.blit(BG, (0, 0))
