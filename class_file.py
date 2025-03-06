@@ -41,6 +41,7 @@ class Position:
 # The Car class has a car position attribute and speed attribute. It also has a width and a height. There is a
 # move_car() function which is responsible for moving the car's x-position, and a draw() function which allows us
 # to display the car on the game screen.
+
 class Car:
     def __init__(self, car_position:Position, speed = 0):
         self.width = 50
@@ -68,3 +69,14 @@ class Player:
     # User-friendly string representation of a Player object
     def __repr__(self):
         return "Player: {}, Score: {}".format(self.name, self.score)
+
+
+class Start:
+    def __init__(self, x,y,image):
+        self.image = image
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (x,y)
+
+    def draw(self):
+        main.WIN.blit(self.image, (self.rect.x ,self.rect.y))
+
