@@ -17,8 +17,9 @@ class Score:
             self.high_score = current_score
 
     # Need to work on this function
-    def update_current_score(self, current_score):
-        return self.current_score += 1
+    #def update_current_score(self, current_score):
+    #    return self.current_score += 1
+
 
     def draw(self, surface):
         font = pygame.font.SysFont("Comic Sans MS", 30)
