@@ -1,6 +1,7 @@
 import pygame
 import main
 
+
 # Defining colors which will later be used for displayed the car on the game screen.
 RED = (250, 0 , 0)
 BLACK = (0, 0, 0)
@@ -71,12 +72,62 @@ class Player:
         return "Player: {}, Score: {}".format(self.name, self.score)
 
 
+# the button class it takes an image that we will use, creates a rectangle for the image and it also displays the position
 class Start:
-    def __init__(self, x,y,image):
-        self.image = image
+    def __init__(self, x, y, image, scale):
+        width = image.get_width()
+        height = image.get_height()
+        self.image = pygame.transform.scale(image, (int(width * scale), int(height * scale)))
         self.rect = self.image.get_rect()
-        self.rect.topleft = (x,y)
+        self.rect.topleft = (x, y)
+        self.clicked = False
 
-    def draw(self):
-        main.WIN.blit(self.image, (self.rect.x ,self.rect.y))
+    def draw(self, surface):
+        action = False
+
+        # get mouse position
+        position = pygame.mouse.get_pos()
+
+        # check mouse over and clicked conditions
+        if self.rect.collidepoint(position):
+            if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
+                self.clicked = True
+                action = True
+
+        if pygame.mouse.get_pressed()[0] == 0:
+            self.clicked = False
+
+        surface.blit(self.image, (self.rect.x, self.rect.y))
+
+        return action
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Time:
+    def __init__(self, time = 5):
+        self.time = time
+
+    def draw(self, surface):
+        font = pygame.font.SysFont("Comic Sans MS", 30)  # Creates a font object
+        text_one = font.render("Time: {}".format(self.time), True, BLACK)  # Creates time text in the desired font
+        surface.blit(text_one, (870, 10))  # Displays text on a defined surface
+
+
 
