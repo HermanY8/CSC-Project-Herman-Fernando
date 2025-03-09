@@ -49,6 +49,7 @@ def runcps():
         turn += 1
         Click_to_Start["text"] = "Click!"
 
+#for the click start the isssue is the Window. it might be becasue were using the wrong function
 Click_to_Start = Button(WIN, text = "Click to Star!", padx = 200, pady= 100, command=runcps)
 Click_to_Start.pack()
 
