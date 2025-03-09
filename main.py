@@ -19,13 +19,13 @@ turn = 0
 cps = 0
 num = 0
 
-last_time =pygame.time.get_ticks()
+last_time = pygame.time.get_ticks()
 
 def cps2(score, time_left):
     global  num, last_time
     if time_left > 0 and num > 0:
         current_time = pygame.time.get_ticks()
-        time_diff= (current_time - last_time) // 1000
+        time_diff= (current_time - last_time) // 1000.0
 
         if time_diff >= 1:
             cps = num / time_diff
@@ -48,7 +48,7 @@ def runcps():
     if turn == 0:
         Click_to_Start["text"] = "Click!"
 
-Click_to_Start = Button(text = "Click to Star!", padx = 200, pady= 100, command=runcps)
+Click_to_Start = Button(text = "Click to Start!", padx = 200, pady= 100, command=runcps)
 Click_to_Start.pack()
 
 #sizes down the image used as the button because it was too big
@@ -63,6 +63,7 @@ def draw(car, score, set_time):
     car.draw(WIN)  # Displays the car object on the game window
     score.draw(WIN)  # Displays the high score and current score on the game window
     set_time.draw(WIN) # Displays the time in the window
+
     if start_button.draw(WIN):
         print("START")
 
@@ -97,6 +98,7 @@ def main():
             car.position.x += velocity_of_car
 
         draw(car, score, time)
+
         cps2(score, time.time)
         time.update_time()
 
