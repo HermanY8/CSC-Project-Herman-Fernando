@@ -22,5 +22,11 @@ methods). Here, we created the Score class, Position class, Car class, and Playe
 class. The Score class keeps track of current score and high score. The Position
 class is used to keep track of an object's position on the screen. A Car class object 
 is used to represent a car with position and speed. A Player class object represents
-a player in the game with a name and a score. 
+a player in the game with a name and a score.
+
+Clicker counter file:
+
+This file is used for our "clicker," which is what will be used to keep track of a player's 
+clicks per second. These clicks per second of a player will determine a car's speed and
+therefore a player's score. This is still a work in progress.
 
