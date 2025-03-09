@@ -1,5 +1,4 @@
 import pygame
-import main
 
 # Defining colors which will later be used for displayed the car on the game screen.
 RED = (250, 0 , 0)
@@ -18,9 +17,8 @@ class Score:
         if current_score > self.high_score:
             self.high_score = current_score
 
-    # Need to work on this function
-    # def update_current_score(self, current_score):
-    #    return self.current_score += 1
+    def update_current_score(self, cps):
+        self.current_score += cps
 
     # This draw method displays the score information on the game window.
     def draw(self, surface):
@@ -50,12 +48,6 @@ class Car:
         self.speed = speed
 
         self.image = pygame.transform.scale(pygame.image.load("red-car-top-view-clipart.png"), (self.width, self.height))
-
-    def move_car(self):
-        self.position.x += self.speed  # Moves the car's x-position by adding the speed to it
-        # Doesn't allow the car to move past the edge of the screen
-        if self.position.x + self.width > main.WIDTH:
-            self.position.x = main.WIDTH - self.width
 
     # Displays a "car" on a defined surface at a defined position
     def draw(self, surface):
@@ -103,8 +95,18 @@ class Start:
 
 
 class Time:
-    def __init__(self, time = 5):
+    def __init__(self, time = 10):
         self.time = time
+        self.start_time = pygame.time.get_ticks()
+
+    def update_time(self):
+        time_passed = (pygame.time.get_ticks() - self.start_time) // 1000
+
+        if time_passed >= 1:
+            self.time -= time_passed
+            self.start_time = pygame.time.get_ticks()
+            if self.time < 0:
+                self.time = 0
 
     def draw(self, surface):
         font = pygame.font.SysFont("Comic Sans MS", 30)  # Creates a font object

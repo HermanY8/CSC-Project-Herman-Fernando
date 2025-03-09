@@ -4,7 +4,6 @@ import random
 from tkinter import *
 from threading import Timer
 import class_file
-from class_file import Score
 
 WIDTH, HEIGHT = 1000, 800
 WIN = pygame.display.set_mode((WIDTH, HEIGHT)) # Window Screen that we created
@@ -16,25 +15,29 @@ BG = pygame.transform.scale(pygame.image.load("Race_Track.jpg"), (WIDTH, HEIGHT)
 
 
 
-velocity_of_car = .5 # This is the amount of space the car covers per click
+velocity_of_car = .7 # This is the amount of space the car covers per click
 
 turn = 0
 cps = 0
 num = 0
 
+last_time =pygame.time.get_ticks()
 
-def cps2():
-    global  num
-    cps = num/class_file.Time().time
-    cps = str(cps)
-    print("Your CPS:" + cps)
-    your_cps = Entry(WIN)
-    your_cps.insert(END,"Your CPS:" + cps)
-    your_cps.pack()
+def cps2(score, time_left):
+    global  num, last_time
+    if time_left > 0 and num > 0:
+        current_time = pygame.time.get_ticks()
+        time_diff= (current_time - last_time) // 1000
 
+        if time_diff >= 1:
+            cps = num / time_diff
+            cps = cps
+            last_time = current_time
 
-cpstrack = Timer(class_file.Time().time, cps2)
-
+            score.update_current_score(cps)
+            num = 0
+    else:
+        pass
 
 def addcps():
     global num
@@ -45,32 +48,13 @@ def runcps():
     if turn == 1:
         addcps()
     if turn == 0:
-        cpstrack.start()
-        turn += 1
         Click_to_Start["text"] = "Click!"
 
-#for the click start the isssue is the Window. it might be becasue were using the wrong function
-Click_to_Start = Button(WIN, text = "Click to Star!", padx = 200, pady= 100, command=runcps)
+Click_to_Start = Button(text = "Click to Star!", padx = 200, pady= 100, command=runcps)
 Click_to_Start.pack()
-
-
-
-
-
-
-
-
 
 #sizes down the image used as the button because it was too big
 start_img = pygame.image.load("New Start Button.png").convert_alpha()
-
-
-
-
-
-
-
-
 
 #calls the button class in order to give its position/ its instance
 start_button = class_file.Start(370,200, start_img, 0.2)
@@ -83,17 +67,13 @@ def draw(car, score, set_time):
     set_time.draw(WIN) # Displays the time in the window
     if start_button.draw(WIN):
         print("START")
-        
 
     # Displays the start button in the window
     pygame.display.update() # Shows any changes made to the window display
 
 
-
-
-
-
 def main():
+    global last_time
 
     car = class_file.Car(class_file.Position(0, 597)) # Creates Car object at the defined position
     score = class_file.Score()  # Creates a Score object
@@ -105,19 +85,25 @@ def main():
     while run:
         # Looking at when user presses x-button to close window
 
-
-
-        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
                 break
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE and car.position.x != WIDTH - car.width:
+                    addcps()
+
         keys = pygame.key.get_pressed()
         if keys [pygame.K_SPACE] and car.position.x + velocity_of_car + car.width <= WIDTH:
             car.position.x += velocity_of_car
 
-            
         draw(car, score, time)
+        cps2(score, time.time)
+        time.update_time()
+
+        if time.time == 0:
+            pass
 
     pygame.quit() # Shuts down all Pygame modules and closes window
 
