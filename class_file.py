@@ -1,5 +1,5 @@
 import pygame
-
+import main
 
 # Defining colors which will later be used for displayed the car on the game screen.
 RED = (250, 0 , 0)
