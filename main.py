@@ -13,8 +13,6 @@ pygame.init() # Initializes Pygame modules which will be used in our program
 
 BG = pygame.transform.scale(pygame.image.load("Race_Track.jpg"), (WIDTH, HEIGHT))  # Scaling background image to fit on the screen
 
-
-
 velocity_of_car = .7 # This is the amount of space the car covers per click
 
 turn = 0
