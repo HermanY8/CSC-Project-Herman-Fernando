@@ -4,8 +4,7 @@ import random
 from tkinter import *
 from threading import Timer
 import class_file
-
-
+from class_file import Score
 
 WIDTH, HEIGHT = 1000, 800
 WIN = pygame.display.set_mode((WIDTH, HEIGHT)) # Window Screen that we created
@@ -19,9 +18,53 @@ BG = pygame.transform.scale(pygame.image.load("Race_Track.jpg"), (WIDTH, HEIGHT)
 
 velocity_of_car = .5 # This is the amount of space the car covers per click
 
+turn = 0
+cps = 0
+num = 0
+
+
+def cps2():
+    global  num
+    cps = num/class_file.Time().time
+    cps = str(cps)
+    print("Your CPS:" + cps)
+    your_cps = Entry(WIN)
+    your_cps.insert(END,"Your CPS:" + cps)
+    your_cps.pack()
+
+
+cpstrack = Timer(class_file.Time().time, cps2)
+
+
+def addcps():
+    global num
+    num += 1
+
+def runcps():
+    global turn
+    if turn == 1:
+        addcps()
+    if turn == 0:
+        cpstrack.start()
+        turn += 1
+        Click_to_Start["text"] = "Click!"
+
+Click_to_Start = Button(WIN, text = "Click to Star!", padx = 200, pady= 100, command=runcps)
+Click_to_Start.pack()
+
+
+
+
+
+
+
+
 
 #sizes down the image used as the button because it was too big
 start_img = pygame.image.load("New Start Button.png").convert_alpha()
+
+
+
 
 
 
@@ -43,6 +86,11 @@ def draw(car, score, set_time):
 
     # Displays the start button in the window
     pygame.display.update() # Shows any changes made to the window display
+
+
+
+
+
 
 def main():
 
@@ -66,6 +114,7 @@ def main():
         keys = pygame.key.get_pressed()
         if keys [pygame.K_SPACE] and car.position.x + velocity_of_car + car.width <= WIDTH:
             car.position.x += velocity_of_car
+
             
         draw(car, score, time)
 

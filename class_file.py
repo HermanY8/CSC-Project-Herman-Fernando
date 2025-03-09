@@ -1,5 +1,4 @@
 import pygame
-import main
 
 
 # Defining colors which will later be used for displayed the car on the game screen.
@@ -100,24 +99,6 @@ class Start:
         surface.blit(self.image, (self.rect.x, self.rect.y))
 
         return action
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 class Time:
