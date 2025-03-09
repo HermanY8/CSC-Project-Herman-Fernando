@@ -23,7 +23,7 @@ def draw(car, score):
 
 def main():
 
-    car = class_file.Car(class_file.Position(0, 605)) # Creates Car object at the defined position
+    car = class_file.Car(class_file.Position(0, 597)) # Creates Car object at the defined position
     score = class_file.Score()  # Creates a Score object
 
     run = True

@@ -38,7 +38,7 @@ def runcps():
         turn += 1
         Click_to_Start["text"] = "Click!"
 
-Click_to_Start = Button(window, text = "Click to Star!", padx = 200, pady= 100, command=runcps)
+Click_to_Start = Button(window, text = "Click to Start!", padx = 200, pady= 100, command=runcps)
 Click_to_Start.pack()
 
 window.mainloop()

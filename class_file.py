@@ -44,10 +44,12 @@ class Position:
 
 class Car:
     def __init__(self, car_position:Position, speed = 0):
-        self.width = 50
-        self.height = 30
+        self.width = 85
+        self.height = 45
         self.position = car_position
         self.speed = speed
+
+        self.image = pygame.transform.scale(pygame.image.load("red-car-top-view-clipart.png"), (self.width, self.height))
 
     def move_car(self):
         self.position.x += self.speed  # Moves the car's x-position by adding the speed to it
@@ -55,10 +57,9 @@ class Car:
         if self.position.x + self.width > main.WIDTH:
             self.position.x = main.WIDTH - self.width
 
-    # Displays a red rectangle on a defined surface at a defined position
+    # Displays a "car" on a defined surface at a defined position
     def draw(self, surface):
-        pygame.draw.rect(surface, RED, (self.position.x, self.position.y, self.width, self.height))
-
+        surface.blit(self.image, (self.position.x, self.position.y))
 
 # The Player class has a name attribute and a score attribute. An object of this class represents a player
 class Player:
@@ -79,4 +80,3 @@ class Start:
 
     def draw(self):
         main.WIN.blit(self.image, (self.rect.x ,self.rect.y))
-
