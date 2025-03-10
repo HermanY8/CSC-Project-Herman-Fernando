@@ -98,10 +98,11 @@ class Button:
 
 
 class Time:
-    def __init__(self, time = 10):
+    def __init__(self, time = 5):
         self.time = time # the time the player has to click
         self.start_time = pygame.time.get_ticks()
 
+    # Updates time every second that passes
     def update_time(self):
         time_passed = (pygame.time.get_ticks() - self.start_time) // 1000
 
@@ -111,8 +112,9 @@ class Time:
             if self.time < 0:
                 self.time = 0
 
+    # Resets the time to a set amount of seconds
     def reset_timer(self):
-        self.time = 10
+        self.time = 5
         self.start_time = pygame.time.get_ticks()
 
     def draw(self, surface):
