@@ -4,7 +4,6 @@ import random
 from tkinter import *
 from threading import Timer
 import class_file
-from class_file import Score
 
 WIDTH, HEIGHT = 1000, 800
 WIN = pygame.display.set_mode((WIDTH, HEIGHT)) # Window Screen that we created
@@ -17,7 +16,7 @@ BG = pygame.transform.scale(pygame.image.load("Race_Track.jpg"), (WIDTH, HEIGHT)
 
 
 velocity_of_car = .5 # This is the amount of space the car covers per click
-
+set_time = 5
 turn = 0
 cps = 0
 num = 0
