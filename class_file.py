@@ -5,8 +5,8 @@ RED = (250, 0 , 0)
 BLACK = (0, 0, 0)
 
 
-# The Score class keeps track of a player's high score and current score and updates them accordingly. There is also a draw() method which
-# is responsible for displaying the scores on the game window.
+# The Score class keeps track of a player's high score and current score and updates them accordingly. There is also a
+# draw() method which is responsible for displaying the scores on the game window.
 class Score:
     def __init__(self, high_score = 0, current_score = 0):
         self.high_score = high_score
@@ -18,7 +18,7 @@ class Score:
             self.high_score = current_score
 
     def update_current_score(self, cps):
-        self.current_score += round(cps, 2)
+        self.current_score += int(cps)
 
     def reset_current_score(self):
         self.current_score = 0

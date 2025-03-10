@@ -1,20 +1,13 @@
 import pygame
-import time
-import random
-from tkinter import *
-from threading import Timer
 import class_file
 
-WIDTH, HEIGHT = 1000, 800
+WIDTH, HEIGHT = 1000, 800  # Setting width and height of our game window
 WIN = pygame.display.set_mode((WIDTH, HEIGHT)) # Window Screen that we created
 pygame.display.set_caption("Clicks") # The main at the top of the window of our game
 
 pygame.init() # Initializes Pygame modules which will be used in our program
 
 BG = pygame.transform.scale(pygame.image.load("Race_Track.jpg"), (WIDTH, HEIGHT))  # Scaling background image to fit on the screen
-
-#sizes down the image used as the button because it was too big
-start_img = pygame.image.load("New Start Button.png").convert_alpha()
 
 velocity_of_car = .7 # This is the amount of space the car covers per click
 
@@ -49,8 +42,6 @@ def addcps():
     global num
     num += 1
 
-
-
 #sizes down the image used as the button because it was too big
 start_img = pygame.image.load("New Start Button.png").convert_alpha() # the start button image
 restart_image = pygame.image.load("Restart.png").convert_alpha() # the restart button image
@@ -58,7 +49,6 @@ restart_image = pygame.image.load("Restart.png").convert_alpha() # the restart b
 #calls the button class in order to give its position/ its instance for both the start and restart image
 start_button = class_file.Button(370, 200, start_img, 0.2)
 restart_button = class_file.Button(350, 288, restart_image, 0.3)
-
 
 def draw(car, score, game_time):
     global game_started
@@ -68,8 +58,8 @@ def draw(car, score, game_time):
     score.draw(WIN)  # Displays the high score and current score on the game window
     game_time.draw(WIN) # Displays the time in the window
 
-    # Checks if start button has been pressed, it has been pressed it removes it from the window. If it has been pressed,
-    # score, timer, and car position is reset.
+    # Checks if button has been pressed. If it has been pressed it removes it from the window and resets the
+    # score, timer, and car position.
     if not game_started:
         if start_button.draw(WIN):
             print("START")
@@ -83,13 +73,15 @@ def draw(car, score, game_time):
             print("RESTART")
             game_started = False
             car.reset_position()
+            score.reset_current_score()
+            game_time.reset_timer()
 
 
     pygame.display.update() # Shows any changes made to the window display
 
 
 def main():
-    global last_time, game_started
+    global game_started
 
     car = class_file.Car() # Creates Car object
     score = class_file.Score()  # Creates a Score object
@@ -107,7 +99,7 @@ def main():
         # If the game has started and there is still time remaining, a press of the space bar will increase the CPS
             if game_started and game_time.time > 0:
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_SPACE and car.position.x != WIDTH - car.width:
+                    if event.key == pygame.K_SPACE:
                         addcps()
 
         # Call to draw() function, which contains all draw() methods from each the Car, Score, and Time classes. It also
