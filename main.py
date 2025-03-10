@@ -4,10 +4,70 @@ import class_file
 WIDTH, HEIGHT = 1000, 800  # Setting width and height of our game window
 WIN = pygame.display.set_mode((WIDTH, HEIGHT)) # Window Screen that we created
 pygame.display.set_caption("Clicks") # The main at the top of the window of our game
-
 pygame.init() # Initializes Pygame modules which will be used in our program
 
+
 BG = pygame.transform.scale(pygame.image.load("Race_Track.jpg"), (WIDTH, HEIGHT))  # Scaling background image to fit on the screen
+
+def intro_screen():
+    intro_image = pygame.image.load("intro background .jpg")
+    image_intro = pygame.transform.scale(intro_image, (WIDTH, HEIGHT))
+
+    font = pygame.font.SysFont("Comic Sans MS", 40)
+    input_box = pygame.Rect(300,136,400,70)
+    color_active = pygame.Color("black")
+    color_inactive = pygame.Color("black")
+    color = color_inactive
+
+    active = False
+    player_name =""
+
+
+    waiting = True
+    while waiting:
+        WIN.blit(image_intro, (0, 0))
+        pygame.draw.rect(WIN, color, input_box, 5)
+
+        text_surface = font.render(player_name, True, color_active)
+        WIN.blit(text_surface, (input_box.x+10, input_box.y+10))
+
+        pygame.display.update()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if input_box.collidepoint(event.pos):
+                    active = True
+                    color = color_active
+                else:
+                    active = False
+                    color = color_inactive
+
+            if event.type == pygame.KEYDOWN:
+                if active:
+                    if event.key == pygame.K_RETURN:
+                        print(f"Player Name: {player_name}")
+                        waiting = False
+
+                    elif event.key == pygame.K_BACKSPACE:
+                        player_name = player_name[:-1]
+                    else:
+                        player_name += event.unicode
+
+    WIN.blit(BG, (0, 0))
+    pygame.display.update()
+    pygame.time.delay(0)
+
+    return player_name
+
+player_name = intro_screen()
+
+
+
+
 
 velocity_of_car = .7 # This is the amount of space the car covers per click
 
