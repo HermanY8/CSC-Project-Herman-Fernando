@@ -13,27 +13,30 @@ pygame.init() # Initializes Pygame modules which will be used in our program
 
 BG = pygame.transform.scale(pygame.image.load("Race_Track.jpg"), (WIDTH, HEIGHT))  # Scaling background image to fit on the screen
 
+velocity_of_car = .7 # This is the amount of space the car covers per click
 
-
-velocity_of_car = .5 # This is the amount of space the car covers per click
-set_time = 5
 turn = 0
 cps = 0
 num = 0
 
+game_started = False
+last_time = pygame.time.get_ticks()
 
-def cps2():
-    global  num
-    cps = num/class_file.Time().time
-    cps = str(cps)
-    print("Your CPS:" + cps)
-    your_cps = Entry(WIN)
-    your_cps.insert(END,"Your CPS:" + cps)
-    your_cps.pack()
+def cps2(score, time_left):
+    global  num, last_time
+    if time_left > 0 and num > 0:
+        current_time = pygame.time.get_ticks()
+        time_diff= (current_time - last_time) // 1000.0
 
-
-cpstrack = Timer(class_file.Time().time, cps2)
-
+        if time_diff >= 1:
+            cps = num / time_diff
+            cps = cps
+            last_time = current_time
+            score.update_current_score(cps)
+            score.update_high_score(score.current_score)
+            num = 0
+    else:
+        pass
 
 def addcps():
     global num
@@ -44,59 +47,42 @@ def runcps():
     if turn == 1:
         addcps()
     if turn == 0:
-        cpstrack.start()
-        turn += 1
         Click_to_Start["text"] = "Click!"
 
-#for the click start the isssue is the Window. it might be becasue were using the wrong function
-Click_to_Start = Button(WIN, text = "Click to Star!", padx = 200, pady= 100, command=runcps)
+Click_to_Start = Button(text = "Click to Start!", padx = 200, pady= 100, command=runcps)
 Click_to_Start.pack()
-
-
-
-
-
-
-
-
 
 #sizes down the image used as the button because it was too big
 start_img = pygame.image.load("New Start Button.png").convert_alpha()
 
-
-
-
-
-
-
-
-
 #calls the button class in order to give its position/ its instance
 start_button = class_file.Start(370,200, start_img, 0.2)
 
-def draw(car, score, set_time):
+def draw(car, score, game_time):
+    global game_started
     WIN.blit(BG, (0, 0))  # Draws the background image at coordinates (0, 0) (top left) on the game window
 
     car.draw(WIN)  # Displays the car object on the game window
     score.draw(WIN)  # Displays the high score and current score on the game window
-    set_time.draw(WIN) # Displays the time in the window
+    game_time.draw(WIN) # Displays the time in the window
+
     if start_button.draw(WIN):
         print("START")
-        
+        score.reset_current_score()
+        game_started = True
+        game_time.reset_timer()
+        car.reset_position()
 
     # Displays the start button in the window
     pygame.display.update() # Shows any changes made to the window display
 
 
-
-
-
-
 def main():
+    global last_time, game_started
 
     car = class_file.Car(class_file.Position(0, 597)) # Creates Car object at the defined position
     score = class_file.Score()  # Creates a Score object
-    time = class_file.Time()
+    game_time = class_file.Time()
 
     run = True
 
@@ -104,19 +90,29 @@ def main():
     while run:
         # Looking at when user presses x-button to close window
 
-
-
-        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
                 break
-        keys = pygame.key.get_pressed()
-        if keys [pygame.K_SPACE] and car.position.x + velocity_of_car + car.width <= WIDTH:
-            car.position.x += velocity_of_car
 
-            
-        draw(car, score, time)
+            if game_started and game_time.time > 0:
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE and car.position.x != WIDTH - car.width:
+                        addcps()
+
+        draw(car, score, game_time)
+
+        keys = pygame.key.get_pressed()
+        if game_started and game_time.time > 0:
+            if keys [pygame.K_SPACE] and car.position.x + velocity_of_car + car.width <= WIDTH:
+                car.position.x += velocity_of_car
+
+        if game_started:
+            cps2(score, game_time.time)
+            game_time.update_time()
+
+        if time.time == 0:
+            pass
 
     pygame.quit() # Shuts down all Pygame modules and closes window
 
