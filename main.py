@@ -81,6 +81,7 @@ def draw(car, score, game_time):
         if restart_button.draw(WIN):
             print("RESTART")
             game_started = False
+            car.reset_position()
 
 
 
