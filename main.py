@@ -61,10 +61,7 @@ start_button = class_file.Button(370, 200, start_img, 0.2)
 restart_button = class_file.Button(350, 288, restart_image, 0.3)
 
 
-
-
 def draw(car, score, game_time):
-def draw(car, score, game_time, start_button):
     global game_started
     WIN.blit(BG, (0, 0))  # Draws the background image at coordinates (0, 0) (top left) on the game window
 
@@ -94,7 +91,6 @@ def draw(car, score, game_time, start_button):
 def main():
     global last_time, game_started
 
-    start_button = class_file.Start(370, 200, start_img, 0.2) # Creates Start object (start button) at the defined position
     car = class_file.Car() # Creates Car object
     score = class_file.Score()  # Creates a Score object
     game_time = class_file.Time()  # Creates a time object
@@ -115,7 +111,7 @@ def main():
                     if event.key == pygame.K_SPACE and car.position.x != WIDTH - car.width:
                         addcps()
 
-        draw(car, score, game_time, start_button)
+        draw(car, score, game_time)
 
         keys = pygame.key.get_pressed()
         if game_started and game_time.time > 0:
