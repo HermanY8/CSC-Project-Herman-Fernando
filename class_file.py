@@ -72,7 +72,7 @@ class Player:
 
 
 # the button class it takes an image that we will use, creates a rectangle for the image and it also displays the position
-class Start:
+class Button:
     def __init__(self, x, y, image, scale):
         width = image.get_width()
         height = image.get_height()
@@ -99,6 +99,8 @@ class Start:
         surface.blit(self.image, (self.rect.x, self.rect.y))
 
         return action
+
+
 
 
 class Time:

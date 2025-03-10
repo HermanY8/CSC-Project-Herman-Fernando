@@ -30,7 +30,7 @@ def cps2(score, time_left):
 
         if time_diff >= 1:
             cps = num / time_diff
-            cps = cps
+            cps = int(cps)
             last_time = current_time
             score.update_current_score(cps)
             score.update_high_score(score.current_score)
@@ -42,21 +42,18 @@ def addcps():
     global num
     num += 1
 
-def runcps():
-    global turn
-    if turn == 1:
-        addcps()
-    if turn == 0:
-        Click_to_Start["text"] = "Click!"
 
-Click_to_Start = Button(text = "Click to Start!", padx = 200, pady= 100, command=runcps)
-Click_to_Start.pack()
 
 #sizes down the image used as the button because it was too big
 start_img = pygame.image.load("New Start Button.png").convert_alpha()
+restart_image = pygame.image.load("Restart.png").convert_alpha()
 
 #calls the button class in order to give its position/ its instance
-start_button = class_file.Start(370,200, start_img, 0.2)
+start_button = class_file.Button(370, 200, start_img, 0.2)
+restart_button = class_file.Button(350, 288, restart_image, 0.3)
+
+
+
 
 def draw(car, score, game_time):
     global game_started
@@ -66,12 +63,20 @@ def draw(car, score, game_time):
     score.draw(WIN)  # Displays the high score and current score on the game window
     game_time.draw(WIN) # Displays the time in the window
 
-    if start_button.draw(WIN):
-        print("START")
-        score.reset_current_score()
-        game_started = True
-        game_time.reset_timer()
-        car.reset_position()
+    if not game_started: # Checks if start button has been pressed, it has been pressed it removes it from the window
+        if start_button.draw(WIN):
+            print("START")
+            score.reset_current_score()
+            game_started = True
+            game_time.reset_timer()
+            car.reset_position()
+
+    if game_started and game_time.time == 0:
+        if restart_button.draw(WIN):
+            print("RESTART")
+            game_started = False
+
+
 
     # Displays the start button in the window
     pygame.display.update() # Shows any changes made to the window display
