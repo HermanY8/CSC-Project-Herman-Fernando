@@ -20,7 +20,7 @@ def intro_screen():
     color = color_inactive
 
     active = False
-    player_name =""
+    player_name = ""
 
 
     waiting = True
@@ -66,7 +66,7 @@ def intro_screen():
 player_name = intro_screen()
 
 
-
+user_name = class_file.Player(player_name)
 
 
 velocity_of_car = .7 # This is the amount of space the car covers per click
@@ -113,7 +113,7 @@ restart_button = class_file.Button(350, 288, restart_image, 0.3)
 def draw(car, score, game_time):
     global game_started
     WIN.blit(BG, (0, 0))  # Draws the background image at coordinates (0, 0) (top left) on the game window
-
+    user_name.draw(WIN)
     car.draw(WIN)  # Displays the car object on the game window
     score.draw(WIN)  # Displays the high score and current score on the game window
     game_time.draw(WIN) # Displays the time in the window

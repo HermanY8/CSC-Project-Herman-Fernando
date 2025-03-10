@@ -30,8 +30,8 @@ class Score:
         font = pygame.font.SysFont("Comic Sans MS", 30)  # Creates a font object
         text_one = font.render("High Score: {}".format(self.high_score), True, BLACK)  # Creates text in the desired font
         text_two = font.render("Current Score: {}".format(self.current_score), True, BLACK)  # Creates text in the desired font
-        surface.blit(text_one, (10, 10))  # Displays text on a defined surface
-        surface.blit(text_two, (10, 50))  # Displays text on a defined surface
+        surface.blit(text_one, (10, 50))  # Displays text on a defined surface
+        surface.blit(text_two, (10, 90))  # Displays text on a defined surface
 
 
 # The Position class defines an object's x and y positions on the game window.
@@ -95,6 +95,14 @@ class Button:
         surface.blit(self.image, (self.rect.x, self.rect.y))
 
         return action # Allows us to use an if statement when draw() method is called because it returns a boolean value
+
+class Player:
+    def __init__(self, name):
+        self.name = name
+    def draw (self,surface):
+        font = pygame.font.SysFont("Comic Sans MS", 30)
+        text_one = font.render("Player Name: {}".format(self.name), True, BLACK)
+        surface.blit(text_one, (10, 10))
 
 
 
