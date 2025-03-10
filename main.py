@@ -22,10 +22,15 @@ def intro_screen():
     active = False
     player_name = ""
 
+    text_to_display_enter_name = font.render("Enter your name:", True, color)
+    position_of_text = (input_box.x, input_box.y -50)
+
 
     waiting = True
     while waiting:
         WIN.blit(image_intro, (0, 0))
+
+        WIN.blit(text_to_display_enter_name, position_of_text)
         pygame.draw.rect(WIN, color, input_box, 5)
 
         text_surface = font.render(player_name, True, color_active)
