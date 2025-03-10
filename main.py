@@ -13,7 +13,7 @@ pygame.init() # Initializes Pygame modules which will be used in our program
 
 BG = pygame.transform.scale(pygame.image.load("Race_Track.jpg"), (WIDTH, HEIGHT))  # Scaling background image to fit on the screen
 
-velocity_of_car = .6 # This is the amount of space the car covers per click
+velocity_of_car = .5 # This is the amount of space the car covers per click
 
 turn = 0
 cps = 0
@@ -95,18 +95,17 @@ def main():
                 run = False
                 break
 
-            if game_started:
+            if game_started and game_time.time > 0:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE and car.position.x != WIDTH - car.width:
                         addcps()
 
+        draw(car, score, game_time)
 
         keys = pygame.key.get_pressed()
-        if game_started:
+        if game_started and game_time.time > 0:
             if keys [pygame.K_SPACE] and car.position.x + velocity_of_car + car.width <= WIDTH:
                 car.position.x += velocity_of_car
-
-        draw(car, score, game_time)
 
         if game_started:
             cps2(score, game_time.time)

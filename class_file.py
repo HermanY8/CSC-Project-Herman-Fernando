@@ -102,7 +102,7 @@ class Start:
 
 
 class Time:
-    def __init__(self, time = 10):
+    def __init__(self, time = 5):
         self.time = time
         self.start_time = pygame.time.get_ticks()
 
@@ -116,7 +116,7 @@ class Time:
                 self.time = 0
 
     def reset_timer(self):
-        self.time = 10
+        self.time = 5
         self.start_time = pygame.time.get_ticks()
 
     def draw(self, surface):
