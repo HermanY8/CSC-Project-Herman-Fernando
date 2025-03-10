@@ -13,24 +13,31 @@ pygame.init() # Initializes Pygame modules which will be used in our program
 
 BG = pygame.transform.scale(pygame.image.load("Race_Track.jpg"), (WIDTH, HEIGHT))  # Scaling background image to fit on the screen
 
+#sizes down the image used as the button because it was too big
+start_img = pygame.image.load("New Start Button.png").convert_alpha()
+
 velocity_of_car = .7 # This is the amount of space the car covers per click
 
 turn = 0
-cps = 0
-num = 0
+cps = 0 # Clicks per second
+num = 0 # Number of clicks
 
-game_started = False
-last_time = pygame.time.get_ticks()
+game_started = False  # Used to keep track of whether the game has started or not
+last_time = pygame.time.get_ticks()  # Stores the time in ms
 
+# Updates the score based on the amount of clicks per second
 def cps2(score, time_left):
-    global  num, last_time
-    if time_left > 0 and num > 0:
+    global  cps, num, last_time
+    if time_left > 0:  # Makes sure there is still time left on the timer
+        # Calculates the time difference between calls of pygame.time.get_ticks()
         current_time = pygame.time.get_ticks()
-        time_diff= (current_time - last_time) // 1000.0
+        time_diff = (current_time - last_time) // 1000.0
 
+        # If the time difference is 1 second (1 second has passed), then calculate the CPS, set last_time to current_time,
+        # and update current score/high score accordingly
         if time_diff >= 1:
             cps = num / time_diff
-            cps = cps
+            cps = round(cps, 2)
             last_time = current_time
             score.update_current_score(cps)
             score.update_high_score(score.current_score)
@@ -38,27 +45,12 @@ def cps2(score, time_left):
     else:
         pass
 
+# Increases the number of clicks by 1
 def addcps():
     global num
     num += 1
 
-def runcps():
-    global turn
-    if turn == 1:
-        addcps()
-    if turn == 0:
-        Click_to_Start["text"] = "Click!"
-
-Click_to_Start = Button(text = "Click to Start!", padx = 200, pady= 100, command=runcps)
-Click_to_Start.pack()
-
-#sizes down the image used as the button because it was too big
-start_img = pygame.image.load("New Start Button.png").convert_alpha()
-
-#calls the button class in order to give its position/ its instance
-start_button = class_file.Start(370,200, start_img, 0.2)
-
-def draw(car, score, game_time):
+def draw(car, score, game_time, start_button):
     global game_started
     WIN.blit(BG, (0, 0))  # Draws the background image at coordinates (0, 0) (top left) on the game window
 
@@ -66,23 +58,23 @@ def draw(car, score, game_time):
     score.draw(WIN)  # Displays the high score and current score on the game window
     game_time.draw(WIN) # Displays the time in the window
 
+    # If the start button is pressed, current score, timer, and car's position is reset, and game_started state is True.
     if start_button.draw(WIN):
-        print("START")
         score.reset_current_score()
         game_started = True
         game_time.reset_timer()
         car.reset_position()
 
-    # Displays the start button in the window
     pygame.display.update() # Shows any changes made to the window display
 
 
 def main():
     global last_time, game_started
 
-    car = class_file.Car(class_file.Position(0, 597)) # Creates Car object at the defined position
+    start_button = class_file.Start(370, 200, start_img, 0.2) # Creates Start object (start button) at the defined position
+    car = class_file.Car() # Creates Car object
     score = class_file.Score()  # Creates a Score object
-    game_time = class_file.Time()
+    game_time = class_file.Time()  # Creates a time object
 
     run = True
 
@@ -100,7 +92,7 @@ def main():
                     if event.key == pygame.K_SPACE and car.position.x != WIDTH - car.width:
                         addcps()
 
-        draw(car, score, game_time)
+        draw(car, score, game_time, start_button)
 
         keys = pygame.key.get_pressed()
         if game_started and game_time.time > 0:

@@ -44,10 +44,10 @@ class Position:
 # to display the car on the game screen.
 
 class Car:
-    def __init__(self, car_position:Position, speed = 0):
+    def __init__(self, position = Position(0, 597), speed = 0):
         self.width = 85
         self.height = 45
-        self.position = car_position
+        self.position = position
         self.speed = speed
 
         self.image = pygame.transform.scale(pygame.image.load("red-car-top-view-clipart.png"), (self.width, self.height))
@@ -79,6 +79,7 @@ class Start:
         self.image = pygame.transform.scale(image, (int(width * scale), int(height * scale)))
         self.rect = self.image.get_rect()
         self.rect.topleft = (x, y)
+        # Used to keep track of whether the button has been clicked or not. Initially, the mouse is set as not clicked
         self.clicked = False
 
     def draw(self, surface):
@@ -89,20 +90,23 @@ class Start:
 
         # check mouse over and clicked conditions
         if self.rect.collidepoint(position):
+            # Checks to see if mouse is over image and if it is left-clicked one time
             if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
+                # Once button is clicked, the clicked status is set to True
                 self.clicked = True
                 action = True
 
+        # Once mouse is released, clicked status is set to False so that future clicks will be detected.
         if pygame.mouse.get_pressed()[0] == 0:
             self.clicked = False
 
         surface.blit(self.image, (self.rect.x, self.rect.y))
 
-        return action
+        return action # Allows us to use an if statement when draw() method is called because it returns a boolean value
 
 
 class Time:
-    def __init__(self, time = 5):
+    def __init__(self, time = 10):
         self.time = time
         self.start_time = pygame.time.get_ticks()
 
@@ -116,13 +120,10 @@ class Time:
                 self.time = 0
 
     def reset_timer(self):
-        self.time = 5
+        self.time = 10
         self.start_time = pygame.time.get_ticks()
 
     def draw(self, surface):
         font = pygame.font.SysFont("Comic Sans MS", 30)  # Creates a font object
         text_one = font.render("Time: {}".format(self.time), True, BLACK)  # Creates time text in the desired font
         surface.blit(text_one, (870, 10))  # Displays text on a defined surface
-
-
-
