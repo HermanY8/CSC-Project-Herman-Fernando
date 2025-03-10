@@ -18,7 +18,6 @@ start_img = pygame.image.load("New Start Button.png").convert_alpha()
 
 velocity_of_car = .7 # This is the amount of space the car covers per click
 
-turn = 0
 cps = 0 # Clicks per second
 num = 0 # Number of clicks
 
@@ -53,10 +52,10 @@ def addcps():
 
 
 #sizes down the image used as the button because it was too big
-start_img = pygame.image.load("New Start Button.png").convert_alpha()
-restart_image = pygame.image.load("Restart.png").convert_alpha()
+start_img = pygame.image.load("New Start Button.png").convert_alpha() # the start button image
+restart_image = pygame.image.load("Restart.png").convert_alpha() # the restart button image
 
-#calls the button class in order to give its position/ its instance
+#calls the button class in order to give its position/ its instance for both the start and restart image
 start_button = class_file.Button(370, 200, start_img, 0.2)
 restart_button = class_file.Button(350, 288, restart_image, 0.3)
 
@@ -69,7 +68,8 @@ def draw(car, score, game_time):
     score.draw(WIN)  # Displays the high score and current score on the game window
     game_time.draw(WIN) # Displays the time in the window
 
-    if not game_started: # Checks if start button has been pressed, it has been pressed it removes it from the window
+    # Checks if start button has been pressed, it has been pressed it removes it from the window
+    if not game_started:
         if start_button.draw(WIN):
             print("START")
             score.reset_current_score()

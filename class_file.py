@@ -60,40 +60,30 @@ class Car:
     def draw(self, surface):
         surface.blit(self.image, (self.position.x, self.position.y))
 
-# The Player class has a name attribute and a score attribute. An object of this class represents a player
-class Player:
-    def __init__(self, name, score = 0):
-        self.name = name
-        self.score = score
-
-    # User-friendly string representation of a Player object
-    def __repr__(self):
-        return "Player: {}, Score: {}".format(self.name, self.score)
-
 
 # the button class it takes an image that we will use, creates a rectangle for the image and it also displays the position
 class Button:
     def __init__(self, x, y, image, scale):
-        width = image.get_width()
-        height = image.get_height()
-        self.image = pygame.transform.scale(image, (int(width * scale), int(height * scale)))
-        self.rect = self.image.get_rect()
-        self.rect.topleft = (x, y)
+        width = image.get_width() #get the width of the image that we plan to use
+        height = image.get_height() #get the height of the image that we plan to use
+        self.image = pygame.transform.scale(image, (int(width * scale), int(height * scale))) # changes the size of the image
+        self.rect = self.image.get_rect() # gets a rectangle from the image
+        self.rect.topleft = (x, y) # sets the position that we want to put the image at
+
         # Used to keep track of whether the button has been clicked or not. Initially, the mouse is set as not clicked
         self.clicked = False
 
     def draw(self, surface):
-        action = False
+        action = False ## Allows us to use an if statement when draw() method is called because it returns a boolean value
 
-        # get mouse position
-        position = pygame.mouse.get_pos()
+        position = pygame.mouse.get_pos() # get mouse position
+
 
         # check mouse over and clicked conditions
         if self.rect.collidepoint(position):
             # Checks to see if mouse is over image and if it is left-clicked one time
             if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
-                # Once button is clicked, the clicked status is set to True
-                self.clicked = True
+                self.clicked = True# Once button is clicked, the clicked status is set to True
                 action = True
 
         # Once mouse is released, clicked status is set to False so that future clicks will be detected.
@@ -109,7 +99,7 @@ class Button:
 
 class Time:
     def __init__(self, time = 10):
-        self.time = time
+        self.time = time # the time the player has to click
         self.start_time = pygame.time.get_ticks()
 
     def update_time(self):
