@@ -51,7 +51,6 @@ def addcps():
     num += 1
 
 
-
 #sizes down the image used as the button because it was too big
 start_img = pygame.image.load("New Start Button.png").convert_alpha()
 restart_image = pygame.image.load("Restart.png").convert_alpha()
@@ -69,7 +68,9 @@ def draw(car, score, game_time):
     score.draw(WIN)  # Displays the high score and current score on the game window
     game_time.draw(WIN) # Displays the time in the window
 
-    if not game_started: # Checks if start button has been pressed, it has been pressed it removes it from the window
+    # Checks if start button has been pressed, it has been pressed it removes it from the window. If it has been pressed,
+    # score, timer, and car position is reset.
+    if not game_started:
         if start_button.draw(WIN):
             print("START")
             score.reset_current_score()
@@ -83,8 +84,6 @@ def draw(car, score, game_time):
             game_started = False
 
 
-
-    # Displays the start button in the window
     pygame.display.update() # Shows any changes made to the window display
 
 
@@ -100,30 +99,30 @@ def main():
     # Making a while loop to make sure that our window stays open and the game runs unless the x-button is pressed
     while run:
         # Looking at when user presses x-button to close window
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
                 break
-
+        # If the game has started and there is still time remaining, a press of the space bar will increase the CPS
             if game_started and game_time.time > 0:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE and car.position.x != WIDTH - car.width:
                         addcps()
 
+        # Call to draw() function, which contains all draw() methods from each the Car, Score, and Time classes. It also
+        # handles the game_started state.
         draw(car, score, game_time)
 
+        # Handles the movement of the car based on the number of presses on the space bar
         keys = pygame.key.get_pressed()
         if game_started and game_time.time > 0:
             if keys [pygame.K_SPACE] and car.position.x + velocity_of_car + car.width <= WIDTH:
                 car.position.x += velocity_of_car
 
+        # If the game has started, the score will be updated based on CPS and the timer will start counting down.
         if game_started:
             cps2(score, game_time.time)
             game_time.update_time()
-
-        if time.time == 0:
-            pass
 
     pygame.quit() # Shuts down all Pygame modules and closes window
 
