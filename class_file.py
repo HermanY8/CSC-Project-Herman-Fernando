@@ -18,7 +18,10 @@ class Score:
             self.high_score = current_score
 
     def update_current_score(self, cps):
-        self.current_score += cps
+        self.current_score += round(cps, 2)
+
+    def reset_current_score(self):
+        self.current_score = 0
 
     # This draw method displays the score information on the game window.
     def draw(self, surface):
@@ -48,6 +51,10 @@ class Car:
         self.speed = speed
 
         self.image = pygame.transform.scale(pygame.image.load("red-car-top-view-clipart.png"), (self.width, self.height))
+
+    def reset_position(self):
+        self.position = Position(0, 597)
+        self.speed = 0
 
     # Displays a "car" on a defined surface at a defined position
     def draw(self, surface):
@@ -107,6 +114,10 @@ class Time:
             self.start_time = pygame.time.get_ticks()
             if self.time < 0:
                 self.time = 0
+
+    def reset_timer(self):
+        self.time = 10
+        self.start_time = pygame.time.get_ticks()
 
     def draw(self, surface):
         font = pygame.font.SysFont("Comic Sans MS", 30)  # Creates a font object

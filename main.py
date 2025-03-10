@@ -19,6 +19,7 @@ turn = 0
 cps = 0
 num = 0
 
+game_started = False
 last_time = pygame.time.get_ticks()
 
 def cps2(score, time_left):
@@ -31,8 +32,8 @@ def cps2(score, time_left):
             cps = num / time_diff
             cps = cps
             last_time = current_time
-
             score.update_current_score(cps)
+            score.update_high_score(score.current_score)
             num = 0
     else:
         pass
@@ -57,26 +58,31 @@ start_img = pygame.image.load("New Start Button.png").convert_alpha()
 #calls the button class in order to give its position/ its instance
 start_button = class_file.Start(370,200, start_img, 0.2)
 
-def draw(car, score, set_time):
+def draw(car, score, game_time):
+    global game_started
     WIN.blit(BG, (0, 0))  # Draws the background image at coordinates (0, 0) (top left) on the game window
 
     car.draw(WIN)  # Displays the car object on the game window
     score.draw(WIN)  # Displays the high score and current score on the game window
-    set_time.draw(WIN) # Displays the time in the window
+    game_time.draw(WIN) # Displays the time in the window
 
     if start_button.draw(WIN):
         print("START")
+        score.reset_current_score()
+        game_started = True
+        game_time.reset_timer()
+        car.reset_position()
 
     # Displays the start button in the window
     pygame.display.update() # Shows any changes made to the window display
 
 
 def main():
-    global last_time
+    global last_time, game_started
 
     car = class_file.Car(class_file.Position(0, 597)) # Creates Car object at the defined position
     score = class_file.Score()  # Creates a Score object
-    time = class_file.Time()
+    game_time = class_file.Time()
 
     run = True
 
@@ -89,18 +95,22 @@ def main():
                 run = False
                 break
 
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE and car.position.x != WIDTH - car.width:
-                    addcps()
+            if game_started:
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE and car.position.x != WIDTH - car.width:
+                        addcps()
+
 
         keys = pygame.key.get_pressed()
-        if keys [pygame.K_SPACE] and car.position.x + velocity_of_car + car.width <= WIDTH:
-            car.position.x += velocity_of_car
+        if game_started:
+            if keys [pygame.K_SPACE] and car.position.x + velocity_of_car + car.width <= WIDTH:
+                car.position.x += velocity_of_car
 
-        draw(car, score, time)
+        draw(car, score, game_time)
 
-        cps2(score, time.time)
-        time.update_time()
+        if game_started:
+            cps2(score, game_time.time)
+            game_time.update_time()
 
         if time.time == 0:
             pass
