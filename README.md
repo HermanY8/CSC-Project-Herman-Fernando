@@ -42,7 +42,7 @@ https://stock.adobe.com/search?k=pixel+mountain+background&asset_id=698684223
 New Start Button.png by @Shlavs
 https://www.pixilart.com/art/start-buttonpixil-c92085e91d246b9
 
-red-car-top-view-clipart.png by ANoymous user
+red-car-top-view-clipart.png by Anoymous user
 https://nohat.cc/f/race-car-clipart-car-clipart-top-view/m2i8K9H7K9m2b1i8-201907240501.html
 
 Restart.png by Kapper24
