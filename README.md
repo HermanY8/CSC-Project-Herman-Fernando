@@ -30,3 +30,20 @@ class is used to keep track of an object's position on the screen. A Car class o
 is used to represent a car with position and speed. The Button class is used to keep
 track of clicks on the start button and restart button. The Time class handles everything
 related to time.
+
+
+CREDIT FOR IMAGES USED 
+Race_Track.png by hiten66 
+https://stock.adobe.com/search?k=pixel+art+car&asset_id=968221098
+
+intro_background.jpg by ad_stock
+https://stock.adobe.com/search?k=pixel+mountain+background&asset_id=698684223
+
+New Start Button.png by @Shlavs
+https://www.pixilart.com/art/start-buttonpixil-c92085e91d246b9
+
+red-car-top-view-clipart.png by ANoymous user
+https://nohat.cc/f/race-car-clipart-car-clipart-top-view/m2i8K9H7K9m2b1i8-201907240501.html
+
+Restart.png by Kapper24
+https://www.pixilart.com/art/restart-button-cfbcd4336297cdd
