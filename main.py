@@ -47,6 +47,7 @@ def intro_screen():
                 if input_box.collidepoint(event.pos):
                     active = True
                     color = color_active
+                    print("name entered")
                 else:
                     active = False
                     color = color_inactive
